@@ -27,15 +27,15 @@ dependencies {
 }
 ```
 
-If you have problem with duplicate entry: com/nineoldandroids/animation/Animator$AnimatorListener.class
-Just exclude nineoldandroids library
+- If you have problem with duplicate entry: com/nineoldandroids/animation/Animator$AnimatorListener.class
+- Just exclude nineoldandroids library
 
 ```groovy
 dependencies {
     	compile 'com.github.bumptech.glide:glide:3.8.0'
     	compile ('com.github.firdausmaulan:GlideSlider:1.0.0') {
-			exclude group: 'com.nineoldandroids', module: 'library'
-		}
+		exclude group: 'com.nineoldandroids', module: 'library'
+	}
 }
 ```
 

@@ -22,7 +22,7 @@ import java.io.File;
  */
 public abstract class BaseSliderView {
 
-    private Context mContext;
+    protected Context mContext;
 
     private Bundle mBundle;
 
@@ -40,7 +40,7 @@ public abstract class BaseSliderView {
     private File mFile;
     private int mRes;
 
-    private OnSliderClickListener mOnSliderClickListener;
+    protected OnSliderClickListener mOnSliderClickListener;
 
     private boolean mErrorDisappear;
 
@@ -54,7 +54,7 @@ public abstract class BaseSliderView {
      * Ctor
      * @param context
      */
-    BaseSliderView(Context context) {
+    protected BaseSliderView(Context context) {
         mContext = context;
     }
 

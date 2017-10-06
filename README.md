@@ -21,9 +21,7 @@ allprojects {
 
 ```groovy
 dependencies {
-    	compile 'com.github.bumptech.glide:glide:3.8.0'
-    	compile 'com.nineoldandroids:library:2.4.0'
-    	compile 'com.github.firdausmaulan:GlideSlider:1.0.0'
+    	compile 'com.github.firdausmaulan:GlideSlider:1.0.1'
 }
 ```
 
@@ -32,8 +30,7 @@ dependencies {
 
 ```groovy
 dependencies {
-    	compile 'com.github.bumptech.glide:glide:3.8.0'
-    	compile ('com.github.firdausmaulan:GlideSlider:1.0.0') {
+    	compile ('com.github.firdausmaulan:GlideSlider:1.0.1') {
 		exclude group: 'com.nineoldandroids', module: 'library'
 	}
 }

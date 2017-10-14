@@ -75,6 +75,11 @@ There are some default indicators. If you want to use a provided indicator:
         />
 ```
 
+## Example
+- [verison 1.0.0]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.0.0)
+- [verison 1.0.1]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.0.1)
+- [verison 1.0.2]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.0.2)
+
 ## Thanks
 
 - [AndroidImageSlider](https://github.com/daimajia/AndroidImageSlider)

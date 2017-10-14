@@ -7,6 +7,7 @@ import android.widget.ImageView;
 
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.bumptech.glide.request.RequestOptions;
 import com.glide.slider.library.R;
 
@@ -47,15 +48,12 @@ public abstract class BaseSliderView {
 
     private String mDescription;
 
+    private BitmapTransformation mBitmapTransformation;
+
     /**
-     * Scale type of the image.
+     * Ctor
+     * @param context
      */
-    private boolean mCrop = true;
-
-    public enum ScaleType {
-        CenterCrop, CenterInside, Fit, FitCenterCrop
-    }
-
     protected BaseSliderView(Context context) {
         mContext = context;
     }
@@ -190,6 +188,16 @@ public abstract class BaseSliderView {
     }
 
     /**
+     * set Glide BitmapTransformation
+     * @param bitmapTransformation transformation to perform
+     * @return self
+     */
+    public BaseSliderView setBitmapTransformation(BitmapTransformation bitmapTransformation) {
+        mBitmapTransformation = bitmapTransformation;
+        return this;
+    }
+
+    /**
      * When you want to implement your own slider view, please call this method in the end in `getView()` method
      *
      * @param v               the whole view
@@ -216,39 +224,37 @@ public abstract class BaseSliderView {
 
         v.findViewById(R.id.loading_bar).setVisibility(View.INVISIBLE);
 
-        if (mCrop) {
+        if (mBitmapTransformation != null) {
             if (mUrl != null) {
                 if (getEmpty() != 0 && getError() != 0) {
-                    Glide.with(mContext).load(mUrl).apply(new RequestOptions().placeholder(getEmpty()).error(getError()).centerCrop()).into(targetImageView);
+                    Glide.with(mContext).load(mUrl).apply(RequestOptions.bitmapTransform(mBitmapTransformation).placeholder(getEmpty()).error(getError())).into(targetImageView);
                 } else if (getEmpty() != 0) {
-                    Glide.with(mContext).load(mUrl).apply(new RequestOptions().placeholder(getEmpty()).centerCrop()).into(targetImageView);
+                    Glide.with(mContext).load(mUrl).apply(RequestOptions.bitmapTransform(mBitmapTransformation).placeholder(getEmpty())).into(targetImageView);
                 } else if (getError() != 0) {
-                    Glide.with(mContext).load(mUrl).apply(new RequestOptions().error(getError()).centerCrop()).into(targetImageView);
+                    Glide.with(mContext).load(mUrl).apply(RequestOptions.bitmapTransform(mBitmapTransformation).error(getError())).into(targetImageView);
                 } else {
-                    Glide.with(mContext).load(mUrl).apply(new RequestOptions().centerCrop()).into(targetImageView);
+                    Glide.with(mContext).load(mUrl).apply(RequestOptions.bitmapTransform(mBitmapTransformation)).into(targetImageView);
                 }
             } else if (mFile != null) {
                 if (getEmpty() != 0 && getError() != 0) {
-                    Glide.with(mContext).load(mFile).apply(new RequestOptions().placeholder(getEmpty()).error(getError()).centerCrop()).into(targetImageView);
+                    Glide.with(mContext).load(mFile).apply(RequestOptions.bitmapTransform(mBitmapTransformation).placeholder(getEmpty()).error(getError())).into(targetImageView);
                 } else if (getEmpty() != 0) {
-                    Glide.with(mContext).load(mFile).apply(new RequestOptions().placeholder(getEmpty()).centerCrop()).into(targetImageView);
+                    Glide.with(mContext).load(mFile).apply(RequestOptions.bitmapTransform(mBitmapTransformation).placeholder(getEmpty())).into(targetImageView);
                 } else if (getError() != 0) {
-                    Glide.with(mContext).load(mFile).apply(new RequestOptions().error(getError()).centerCrop()).into(targetImageView);
+                    Glide.with(mContext).load(mFile).apply(RequestOptions.bitmapTransform(mBitmapTransformation).error(getError())).into(targetImageView);
                 } else {
-                    Glide.with(mContext).load(mFile).apply(new RequestOptions().centerCrop()).into(targetImageView);
+                    Glide.with(mContext).load(mFile).apply(RequestOptions.bitmapTransform(mBitmapTransformation)).into(targetImageView);
                 }
             } else if (mRes != 0) {
                 if (getEmpty() != 0 && getError() != 0) {
-                    Glide.with(mContext).load(mRes).apply(new RequestOptions().placeholder(getEmpty()).error(getError()).centerCrop()).into(targetImageView);
+                    Glide.with(mContext).load(mRes).apply(RequestOptions.bitmapTransform(mBitmapTransformation).placeholder(getEmpty()).error(getError())).into(targetImageView);
                 } else if (getEmpty() != 0) {
-                    Glide.with(mContext).load(mRes).apply(new RequestOptions().placeholder(getEmpty()).centerCrop()).into(targetImageView);
+                    Glide.with(mContext).load(mRes).apply(RequestOptions.bitmapTransform(mBitmapTransformation).placeholder(getEmpty())).into(targetImageView);
                 } else if (getError() != 0) {
-                    Glide.with(mContext).load(mRes).apply(new RequestOptions().error(getError()).centerCrop()).into(targetImageView);
+                    Glide.with(mContext).load(mRes).apply(RequestOptions.bitmapTransform(mBitmapTransformation).error(getError())).into(targetImageView);
                 } else {
-                    Glide.with(mContext).load(mRes).apply(new RequestOptions().centerCrop()).into(targetImageView);
+                    Glide.with(mContext).load(mRes).apply(RequestOptions.bitmapTransform(mBitmapTransformation)).into(targetImageView);
                 }
-            } else {
-                return;
             }
         } else {
             if (mUrl != null) {
@@ -281,15 +287,8 @@ public abstract class BaseSliderView {
                 } else {
                     Glide.with(mContext).load(mRes).into(targetImageView);
                 }
-            } else {
-                return;
             }
         }
-    }
-
-    public BaseSliderView setCenterCrop(boolean crop) {
-        mCrop = crop;
-        return this;
     }
 
     /**

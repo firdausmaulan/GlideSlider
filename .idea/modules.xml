@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/GlideSlider.iml" filepath="$PROJECT_DIR$/GlideSlider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/GlideSlider.iml" filepath="$PROJECT_DIR$/.idea/GlideSlider.iml" />
+      <module fileurl="file://D:\Work\Project\Android\Git clone\GlideSlider\GlideSlider.iml" filepath="D:\Work\Project\Android\Git clone\GlideSlider\GlideSlider.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
     </modules>

@@ -2,9 +2,9 @@ package com.glide.slider.library.SliderTypes;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
 import android.view.View;
 import android.widget.ImageView;
-
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
@@ -12,6 +12,8 @@ import com.bumptech.glide.request.RequestOptions;
 import com.glide.slider.library.R;
 
 import java.io.File;
+
+import static android.view.View.VISIBLE;
 
 /**
  * When you want to make your own slider view, you must extends from this class.
@@ -47,6 +49,10 @@ public abstract class BaseSliderView {
     private ImageLoadListener mLoadListener;
 
     private String mDescription;
+
+    private @ColorInt int mBackgroundColor = 0x77000000;
+
+    private int visibility = VISIBLE;
 
     private BitmapTransformation mBitmapTransformation;
 
@@ -99,6 +105,28 @@ public abstract class BaseSliderView {
      */
     public BaseSliderView description(String description) {
         mDescription = description;
+        return this;
+    }
+
+    /**
+     * set background color for description
+     *
+     * @param backgroundColor
+     * @return
+     */
+    public BaseSliderView descriptionBackground(@ColorInt int backgroundColor) {
+        mBackgroundColor = backgroundColor;
+        return this;
+    }
+
+    /**
+     * set visibily for description
+     *
+     * @param visibility
+     * @return
+     */
+    public BaseSliderView descriptionVisibility(int visibility) {
+        this.visibility = visibility;
         return this;
     }
 
@@ -170,6 +198,14 @@ public abstract class BaseSliderView {
 
     public String getDescription() {
         return mDescription;
+    }
+
+    public @ColorInt int getDescriptionBackground() {
+        return mBackgroundColor;
+    }
+
+    public int getDescriptionVisibility() {
+        return visibility;
     }
 
     public Context getContext() {

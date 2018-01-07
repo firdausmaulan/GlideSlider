@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.bumptech.glide.request.RequestOptions;
@@ -22,7 +21,7 @@ import java.io.File;
  */
 public abstract class BaseSliderView {
 
-    protected Context mContext;
+    private Context mContext;
 
     private Bundle mBundle;
 
@@ -40,7 +39,7 @@ public abstract class BaseSliderView {
     private File mFile;
     private int mRes;
 
-    protected OnSliderClickListener mOnSliderClickListener;
+    private OnSliderClickListener mOnSliderClickListener;
 
     private boolean mErrorDisappear;
 
@@ -50,11 +49,14 @@ public abstract class BaseSliderView {
 
     private BitmapTransformation mBitmapTransformation;
 
+    private RequestOptions mRequestOptions;
+
     /**
      * Ctor
+     *
      * @param context
      */
-    protected BaseSliderView(Context context) {
+    BaseSliderView(Context context) {
         mContext = context;
     }
 
@@ -188,12 +190,13 @@ public abstract class BaseSliderView {
     }
 
     /**
-     * set Glide BitmapTransformation
-     * @param bitmapTransformation transformation to perform
+     * set Glide RequestOption
+     *
+     * @param requestOption
      * @return self
      */
-    public BaseSliderView setBitmapTransformation(BitmapTransformation bitmapTransformation) {
-        mBitmapTransformation = bitmapTransformation;
+    public BaseSliderView setRequestOption(RequestOptions requestOption) {
+        mRequestOptions = requestOption;
         return this;
     }
 
@@ -203,7 +206,7 @@ public abstract class BaseSliderView {
      * @param v               the whole view
      * @param targetImageView where to place image
      */
-    protected void bindEventAndShow(final View v, ImageView targetImageView) {
+    void bindEventAndShow(final View v, ImageView targetImageView) {
         final BaseSliderView me = this;
 
         v.setOnClickListener(new View.OnClickListener() {
@@ -224,69 +227,21 @@ public abstract class BaseSliderView {
 
         v.findViewById(R.id.loading_bar).setVisibility(View.INVISIBLE);
 
-        if (mBitmapTransformation != null) {
+        if (mRequestOptions != null) {
             if (mUrl != null) {
-                if (getEmpty() != 0 && getError() != 0) {
-                    Glide.with(mContext).load(mUrl).apply(RequestOptions.bitmapTransform(mBitmapTransformation).placeholder(getEmpty()).error(getError())).into(targetImageView);
-                } else if (getEmpty() != 0) {
-                    Glide.with(mContext).load(mUrl).apply(RequestOptions.bitmapTransform(mBitmapTransformation).placeholder(getEmpty())).into(targetImageView);
-                } else if (getError() != 0) {
-                    Glide.with(mContext).load(mUrl).apply(RequestOptions.bitmapTransform(mBitmapTransformation).error(getError())).into(targetImageView);
-                } else {
-                    Glide.with(mContext).load(mUrl).apply(RequestOptions.bitmapTransform(mBitmapTransformation)).into(targetImageView);
-                }
+                Glide.with(mContext).load(mUrl).apply(mRequestOptions).into(targetImageView);
             } else if (mFile != null) {
-                if (getEmpty() != 0 && getError() != 0) {
-                    Glide.with(mContext).load(mFile).apply(RequestOptions.bitmapTransform(mBitmapTransformation).placeholder(getEmpty()).error(getError())).into(targetImageView);
-                } else if (getEmpty() != 0) {
-                    Glide.with(mContext).load(mFile).apply(RequestOptions.bitmapTransform(mBitmapTransformation).placeholder(getEmpty())).into(targetImageView);
-                } else if (getError() != 0) {
-                    Glide.with(mContext).load(mFile).apply(RequestOptions.bitmapTransform(mBitmapTransformation).error(getError())).into(targetImageView);
-                } else {
-                    Glide.with(mContext).load(mFile).apply(RequestOptions.bitmapTransform(mBitmapTransformation)).into(targetImageView);
-                }
+                Glide.with(mContext).load(mUrl).apply(mRequestOptions).into(targetImageView);
             } else if (mRes != 0) {
-                if (getEmpty() != 0 && getError() != 0) {
-                    Glide.with(mContext).load(mRes).apply(RequestOptions.bitmapTransform(mBitmapTransformation).placeholder(getEmpty()).error(getError())).into(targetImageView);
-                } else if (getEmpty() != 0) {
-                    Glide.with(mContext).load(mRes).apply(RequestOptions.bitmapTransform(mBitmapTransformation).placeholder(getEmpty())).into(targetImageView);
-                } else if (getError() != 0) {
-                    Glide.with(mContext).load(mRes).apply(RequestOptions.bitmapTransform(mBitmapTransformation).error(getError())).into(targetImageView);
-                } else {
-                    Glide.with(mContext).load(mRes).apply(RequestOptions.bitmapTransform(mBitmapTransformation)).into(targetImageView);
-                }
+                Glide.with(mContext).load(mUrl).apply(mRequestOptions).into(targetImageView);
             }
         } else {
             if (mUrl != null) {
-                if (getEmpty() != 0 && getError() != 0) {
-                    Glide.with(mContext).load(mUrl).apply(new RequestOptions().placeholder(getEmpty()).error(getError())).into(targetImageView);
-                } else if (getEmpty() != 0) {
-                    Glide.with(mContext).load(mUrl).apply(new RequestOptions().placeholder(getEmpty())).into(targetImageView);
-                } else if (getError() != 0) {
-                    Glide.with(mContext).load(mUrl).apply(new RequestOptions().error(getError())).into(targetImageView);
-                } else {
-                    Glide.with(mContext).load(mUrl).into(targetImageView);
-                }
+                Glide.with(mContext).load(mUrl).into(targetImageView);
             } else if (mFile != null) {
-                if (getEmpty() != 0 && getError() != 0) {
-                    Glide.with(mContext).load(mFile).apply(new RequestOptions().placeholder(getEmpty()).error(getError())).into(targetImageView);
-                } else if (getEmpty() != 0) {
-                    Glide.with(mContext).load(mFile).apply(new RequestOptions().placeholder(getEmpty())).into(targetImageView);
-                } else if (getError() != 0) {
-                    Glide.with(mContext).load(mFile).apply(new RequestOptions().error(getError())).into(targetImageView);
-                } else {
-                    Glide.with(mContext).load(mFile).into(targetImageView);
-                }
+                Glide.with(mContext).load(mUrl).into(targetImageView);
             } else if (mRes != 0) {
-                if (getEmpty() != 0 && getError() != 0) {
-                    Glide.with(mContext).load(mRes).apply(new RequestOptions().placeholder(getEmpty()).error(getError())).into(targetImageView);
-                } else if (getEmpty() != 0) {
-                    Glide.with(mContext).load(mRes).apply(new RequestOptions().placeholder(getEmpty())).into(targetImageView);
-                } else if (getError() != 0) {
-                    Glide.with(mContext).load(mRes).apply(new RequestOptions().error(getError())).into(targetImageView);
-                } else {
-                    Glide.with(mContext).load(mRes).into(targetImageView);
-                }
+                Glide.with(mContext).load(mUrl).into(targetImageView);
             }
         }
     }

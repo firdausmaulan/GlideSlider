@@ -21,18 +21,7 @@ allprojects {
 
 ```groovy
 dependencies {
-    	compile 'com.github.firdausmaulan:GlideSlider:1.1.0'
-}
-```
-
-- If you have problem with duplicate entry: com/nineoldandroids/animation/Animator$AnimatorListener.class
-- Just exclude nineoldandroids library
-
-```groovy
-dependencies {
-    	compile ('com.github.firdausmaulan:GlideSlider:1.1.0') {
-		exclude group: 'com.nineoldandroids', module: 'library'
-	}
+    	implementation 'com.github.firdausmaulan:GlideSlider:1.1.1'
 }
 ```
 
@@ -60,8 +49,7 @@ Add the Slider to your layout:
 <com.glide.slider.library.SliderLayout
         android:id="@+id/slider"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-/>
+        android:layout_height="200dp"/>
 ```        
  
 There are some default indicators. If you want to use a provided indicator:
@@ -71,8 +59,7 @@ There are some default indicators. If you want to use a provided indicator:
         android:id="@+id/custom_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        />
+        android:gravity="center"/>
 ```
 
 ## Example
@@ -80,12 +67,10 @@ There are some default indicators. If you want to use a provided indicator:
 - [verison 1.0.1]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.0.1)
 - [verison 1.0.2]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.0.2)
 - [verison 1.1.0]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.1.0)
+- [verison 1.1.1]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.1.1)
 
 ## Thanks
 
 - [AndroidImageSlider](https://github.com/daimajia/AndroidImageSlider)
 - [Glide](https://github.com/bumptech/glide)
-- [NineOldAndroids](https://github.com/JakeWharton/NineOldAndroids)
 - [ViewPagerTransforms](https://github.com/ToxicBakery/ViewPagerTransforms)
-
-- [Miroslav Kudrnac](https://github.com/mkudrnac)

@@ -17,23 +17,12 @@ import java.io.File;
  * BaseSliderView provides some useful methods.
  * I provide two example: {@link com.glide.slider.library.SliderTypes.DefaultSliderView} and
  * {@link com.glide.slider.library.SliderTypes.TextSliderView}
- * if you want to show progressbar, you just need to set a progressbar id as @+id/loading_bar.
  */
 public abstract class BaseSliderView {
 
     private Context mContext;
 
     private Bundle mBundle;
-
-    /**
-     * Error place holder image.
-     */
-    private int mErrorPlaceHolderRes;
-
-    /**
-     * Empty imageView placeholder.
-     */
-    private int mEmptyPlaceHolderRes;
 
     private String mUrl;
     private File mFile;
@@ -61,17 +50,6 @@ public abstract class BaseSliderView {
     }
 
     /**
-     * the placeholder image when loading image from url or file.
-     *
-     * @param resId Image resource id
-     * @return
-     */
-    public BaseSliderView empty(int resId) {
-        mEmptyPlaceHolderRes = resId;
-        return this;
-    }
-
-    /**
      * determine whether remove the image which failed to download or load from file
      *
      * @param disappear
@@ -79,17 +57,6 @@ public abstract class BaseSliderView {
      */
     public BaseSliderView errorDisappear(boolean disappear) {
         mErrorDisappear = disappear;
-        return this;
-    }
-
-    /**
-     * if you set errorDisappear false, this will set a error placeholder image.
-     *
-     * @param resId image resource id
-     * @return
-     */
-    public BaseSliderView error(int resId) {
-        mErrorPlaceHolderRes = resId;
         return this;
     }
 
@@ -160,14 +127,6 @@ public abstract class BaseSliderView {
 
     public boolean isErrorDisappear() {
         return mErrorDisappear;
-    }
-
-    public int getEmpty() {
-        return mEmptyPlaceHolderRes;
-    }
-
-    public int getError() {
-        return mErrorPlaceHolderRes;
     }
 
     public String getDescription() {

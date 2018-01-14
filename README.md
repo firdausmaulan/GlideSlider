@@ -21,7 +21,7 @@ allprojects {
 
 ```groovy
 dependencies {
-    	implementation 'com.github.firdausmaulan:GlideSlider:1.1.1'
+    	implementation 'com.github.firdausmaulan:GlideSlider:1.2.0'
 }
 ```
 
@@ -68,6 +68,7 @@ There are some default indicators. If you want to use a provided indicator:
 - [verison 1.0.2]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.0.2)
 - [verison 1.1.0]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.1.0)
 - [verison 1.1.1]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.1.1)
+- [verison 1.1.1]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.2.0)
 
 ## Thanks
 

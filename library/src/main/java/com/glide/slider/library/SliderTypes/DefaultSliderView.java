@@ -1,6 +1,7 @@
 package com.glide.slider.library.SliderTypes;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatImageView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -21,7 +22,7 @@ public class DefaultSliderView extends BaseSliderView {
     @Override
     public View getView() {
         View v = LayoutInflater.from(getContext()).inflate(R.layout.render_type_default, null);
-        ImageView target = (ImageView) v.findViewById(R.id.glide_slider_image);
+        AppCompatImageView target = v.findViewById(R.id.glide_slider_image);
         bindEventAndShow(v, target);
         return v;
     }

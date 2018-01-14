@@ -1,13 +1,20 @@
 package com.glide.slider.library.SliderTypes;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.widget.AppCompatImageView;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
 import com.glide.slider.library.R;
 
 import java.io.File;
@@ -20,7 +27,7 @@ import java.io.File;
  */
 public abstract class BaseSliderView {
 
-    private Context mContext;
+    public Context mContext;
 
     private Bundle mBundle;
 
@@ -28,36 +35,25 @@ public abstract class BaseSliderView {
     private File mFile;
     private int mRes;
 
-    private OnSliderClickListener mOnSliderClickListener;
+    public OnSliderClickListener mOnSliderClickListener;
 
-    private boolean mErrorDisappear;
-
-    private ImageLoadListener mLoadListener;
+    public ImageLoadListener mLoadListener;
 
     private String mDescription;
 
-    private BitmapTransformation mBitmapTransformation;
-
     private RequestOptions mRequestOptions;
+
+    private boolean isProgressBarVisible = false;
+
+    private int mBackgroundColor = Color.BLACK;
 
     /**
      * Ctor
      *
      * @param context
      */
-    BaseSliderView(Context context) {
+    public BaseSliderView(Context context) {
         mContext = context;
-    }
-
-    /**
-     * determine whether remove the image which failed to download or load from file
-     *
-     * @param disappear
-     * @return
-     */
-    public BaseSliderView errorDisappear(boolean disappear) {
-        mErrorDisappear = disappear;
-        return this;
     }
 
     /**
@@ -125,10 +121,6 @@ public abstract class BaseSliderView {
         return mUrl;
     }
 
-    public boolean isErrorDisappear() {
-        return mErrorDisappear;
-    }
-
     public String getDescription() {
         return mDescription;
     }
@@ -160,13 +152,35 @@ public abstract class BaseSliderView {
     }
 
     /**
+     * set Progressbar visible or gone
+     *
+     * @param isVisible
+     */
+    public BaseSliderView setProgressBarVisible(boolean isVisible) {
+        isProgressBarVisible = isVisible;
+        return this;
+    }
+
+    /**
+     * set Background Color
+     *
+     * @param color
+     */
+    public BaseSliderView setBackgroundColor(int color) {
+        mBackgroundColor = color;
+        return this;
+    }
+
+    /**
      * When you want to implement your own slider view, please call this method in the end in `getView()` method
      *
      * @param v               the whole view
      * @param targetImageView where to place image
      */
-    void bindEventAndShow(final View v, ImageView targetImageView) {
+    void bindEventAndShow(final View v, AppCompatImageView targetImageView) {
         final BaseSliderView me = this;
+
+        v.findViewById(R.id.glide_slider_background).setBackgroundColor(mBackgroundColor);
 
         v.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,23 +198,68 @@ public abstract class BaseSliderView {
             mLoadListener.onStart(me);
         }
 
-        v.findViewById(R.id.loading_bar).setVisibility(View.INVISIBLE);
-
-        if (mRequestOptions != null) {
-            if (mUrl != null) {
-                Glide.with(mContext).load(mUrl).apply(mRequestOptions).into(targetImageView);
-            } else if (mFile != null) {
-                Glide.with(mContext).load(mUrl).apply(mRequestOptions).into(targetImageView);
-            } else if (mRes != 0) {
-                Glide.with(mContext).load(mUrl).apply(mRequestOptions).into(targetImageView);
-            }
+        final ProgressBar mProgressBar = v.findViewById(R.id.loading_bar);
+        if (isProgressBarVisible) {
+            mProgressBar.setVisibility(View.VISIBLE);
         } else {
-            if (mUrl != null) {
-                Glide.with(mContext).load(mUrl).into(targetImageView);
-            } else if (mFile != null) {
-                Glide.with(mContext).load(mUrl).into(targetImageView);
-            } else if (mRes != 0) {
-                Glide.with(mContext).load(mUrl).into(targetImageView);
+            mProgressBar.setVisibility(View.GONE);
+        }
+
+        Object imageToLoad = null;
+        if (mUrl != null) {
+            imageToLoad = mUrl;
+        } else if (mFile != null) {
+            imageToLoad = mFile;
+        } else if (mRes != 0) {
+            imageToLoad = mRes;
+        }
+
+        if (imageToLoad != null) {
+            if (mRequestOptions != null) {
+                Glide.with(mContext).load(imageToLoad)
+                        .apply(mRequestOptions)
+                        .listener(new RequestListener<Drawable>() {
+                            @Override
+                            public boolean onLoadFailed(@Nullable GlideException e,
+                                                        Object model,
+                                                        Target<Drawable> target,
+                                                        boolean isFirstResource) {
+                                mProgressBar.setVisibility(View.GONE);
+                                return false;
+                            }
+
+                            @Override
+                            public boolean onResourceReady(Drawable resource,
+                                                           Object model,
+                                                           Target<Drawable> target,
+                                                           DataSource dataSource,
+                                                           boolean isFirstResource) {
+                                mProgressBar.setVisibility(View.GONE);
+                                return false;
+                            }
+                        }).into(targetImageView);
+            } else {
+                Glide.with(mContext).load(imageToLoad)
+                        .listener(new RequestListener<Drawable>() {
+                            @Override
+                            public boolean onLoadFailed(@Nullable GlideException e,
+                                                        Object model,
+                                                        Target<Drawable> target,
+                                                        boolean isFirstResource) {
+                                mProgressBar.setVisibility(View.GONE);
+                                return false;
+                            }
+
+                            @Override
+                            public boolean onResourceReady(Drawable resource,
+                                                           Object model,
+                                                           Target<Drawable> target,
+                                                           DataSource dataSource,
+                                                           boolean isFirstResource) {
+                                mProgressBar.setVisibility(View.GONE);
+                                return false;
+                            }
+                        }).into(targetImageView);
             }
         }
     }

@@ -177,7 +177,7 @@ public abstract class BaseSliderView {
      * @param v               the whole view
      * @param targetImageView where to place image
      */
-    void bindEventAndShow(final View v, AppCompatImageView targetImageView) {
+    protected void bindEventAndShow(final View v, AppCompatImageView targetImageView) {
         final BaseSliderView me = this;
 
         v.findViewById(R.id.glide_slider_background).setBackgroundColor(mBackgroundColor);

@@ -12,6 +12,26 @@
 #### Gradle
 
 ```groovy
+buildscript {
+
+	// You can use other version
+	// Change library version below
+    ext.support_version = '27.0.2'
+    ext.glide_version = '4.6.1'
+    ext.androidsvg_version = '1.2.1'
+    ext.glide_slider_version = '1.3.1'
+
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.0.1'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
 allprojects {
 	repositories {
 		maven { url 'https://jitpack.io' }
@@ -21,7 +41,7 @@ allprojects {
 
 ```groovy
 dependencies {
-    	implementation 'com.github.firdausmaulan:GlideSlider:1.3.0'
+    	implementation 'com.github.firdausmaulan:GlideSlider:1.3.1'
 }
 ```
 
@@ -70,6 +90,7 @@ There are some default indicators. If you want to use a provided indicator:
 - [verison 1.1.1]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.1.1)
 - [verison 1.2.0]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.2.0)
 - [verison 1.3.0]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.3.0)
+- [verison 1.3.1]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.3.1)
 
 ## Thanks
 

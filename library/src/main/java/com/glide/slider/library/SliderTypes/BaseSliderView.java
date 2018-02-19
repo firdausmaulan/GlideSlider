@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
@@ -214,9 +215,11 @@ public abstract class BaseSliderView {
             imageToLoad = mRes;
         }
 
+        RequestBuilder<Drawable> requestBuilder = Glide.with(mContext).as(Drawable.class);
+
         if (imageToLoad != null) {
             if (mRequestOptions != null) {
-                Glide.with(mContext).load(imageToLoad)
+                requestBuilder.load(imageToLoad)
                         .apply(mRequestOptions)
                         .listener(new RequestListener<Drawable>() {
                             @Override
@@ -239,7 +242,7 @@ public abstract class BaseSliderView {
                             }
                         }).into(targetImageView);
             } else {
-                Glide.with(mContext).load(imageToLoad)
+                requestBuilder.load(imageToLoad)
                         .listener(new RequestListener<Drawable>() {
                             @Override
                             public boolean onLoadFailed(@Nullable GlideException e,

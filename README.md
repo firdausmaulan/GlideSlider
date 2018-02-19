@@ -41,7 +41,7 @@ allprojects {
 
 ```groovy
 dependencies {
-    	implementation 'com.github.firdausmaulan:GlideSlider:1.3.1'
+    implementation "com.github.firdausmaulan:GlideSlider:$glide_slider_version"
 }
 ```
 

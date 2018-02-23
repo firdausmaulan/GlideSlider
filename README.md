@@ -1,6 +1,3 @@
-[![Release](https://jitpack.io/v/firdausmaulan/GlideSlider.svg)]
-(https://jitpack.io/#firdausmaulan/GlideSlider/)
-
 - Edited from https://github.com/daimajia/AndroidImageSlider
 - Change image loader from Picasso to Glide
  

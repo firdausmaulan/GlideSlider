@@ -83,14 +83,14 @@ There are some default indicators. If you want to use a provided indicator:
 ```
 
 ## Example
-- [verison 1.0.0]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.0.0)
-- [verison 1.0.1]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.0.1)
-- [verison 1.0.2]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.0.2)
-- [verison 1.1.0]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.1.0)
-- [verison 1.1.1]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.1.1)
-- [verison 1.2.0]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.2.0)
-- [verison 1.3.0]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.3.0)
-- [verison 1.3.1]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.3.1)
+- [version 1.0.0]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.0.0)
+- [version 1.0.1]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.0.1)
+- [version 1.0.2]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.0.2)
+- [version 1.1.0]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.1.0)
+- [version 1.1.1]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.1.1)
+- [version 1.2.0]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.2.0)
+- [version 1.3.0]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.3.0)
+- [version 1.3.1]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.3.1)
 
 ## Thanks
 

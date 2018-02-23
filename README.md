@@ -1,4 +1,4 @@
-[![Release](https://jitpack.io/v/User/Repo.svg)]
+[![Release](https://jitpack.io/v/firdausmaulan/GlideSlider.svg)]
 (https://jitpack.io/#firdausmaulan/GlideSlider/)
 
 - Edited from https://github.com/daimajia/AndroidImageSlider

@@ -657,6 +657,19 @@ public class SliderLayout extends RelativeLayout {
     }
 
     /**
+     * Get number of slider inside the SliderAdapter
+     * @return
+     */
+    public int getSliderImageCount() {
+        SliderAdapter adapter = getRealAdapter();
+        if(adapter != null) {
+            return adapter.getCount();
+        } else {
+            return 0;
+        }
+    }
+
+    /**
      * set current slider
      *
      * @param position

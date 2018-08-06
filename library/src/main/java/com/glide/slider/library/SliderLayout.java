@@ -544,7 +544,6 @@ public class SliderLayout extends RelativeLayout {
             return mIndicator.getIndicatorVisibility();
         }
         return PagerIndicator.IndicatorVisibility.Invisible;
-
     }
 
     /**

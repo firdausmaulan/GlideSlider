@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.util.AttributeSet;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.glide.slider.library.Tricks.InfinitePagerAdapter;
 import com.glide.slider.library.Tricks.ViewPagerEx;
 
 import java.util.ArrayList;
+import java.util.logging.Handler;
 
 /**
  * Pager Indicator.
@@ -67,9 +69,7 @@ public class PagerIndicator extends LinearLayout implements ViewPagerEx.OnPageCh
     public enum IndicatorVisibility {
         Visible,
         Invisible;
-    }
-
-    ;
+    };
 
     private GradientDrawable mUnSelectedGradientDrawable;
     private GradientDrawable mSelectedGradientDrawable;
@@ -102,7 +102,7 @@ public class PagerIndicator extends LinearLayout implements ViewPagerEx.OnPageCh
 
         mContext = context;
 
-        final TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.PagerIndicator, 0, 0);
+        TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.PagerIndicator, 0, 0);
 
         int visibility = attributes.getInt(R.styleable.PagerIndicator_visibility, IndicatorVisibility.Visible.ordinal());
 
@@ -127,8 +127,12 @@ public class PagerIndicator extends LinearLayout implements ViewPagerEx.OnPageCh
         mUserSetUnSelectedIndicatorResId = attributes.getResourceId(R.styleable.PagerIndicator_unselected_drawable,
                 0);
 
-        int mDefaultSelectedColor = attributes.getColor(R.styleable.PagerIndicator_selected_color, Color.rgb(255, 255, 255));
-        int mDefaultUnSelectedColor = attributes.getColor(R.styleable.PagerIndicator_unselected_color, Color.argb(33, 255, 255, 255));
+        int resColor = ContextCompat.getColor(context, R.color.glide_slider_indicator_color);
+        int r = Color.red(resColor);
+        int g = Color.green(resColor);
+        int b = Color.blue(resColor);
+        int mDefaultSelectedColor = attributes.getColor(R.styleable.PagerIndicator_selected_color, Color.rgb(r, g, b));
+        int mDefaultUnSelectedColor = attributes.getColor(R.styleable.PagerIndicator_unselected_color, Color.argb(33, r, g, b));
 
         float mDefaultSelectedWidth = attributes.getDimension(R.styleable.PagerIndicator_selected_width, (int) pxFromDp(6));
         float mDefaultSelectedHeight = attributes.getDimensionPixelSize(R.styleable.PagerIndicator_selected_height, (int) pxFromDp(6));

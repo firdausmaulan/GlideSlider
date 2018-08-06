@@ -14,28 +14,32 @@
 ```groovy
 buildscript {
 
-	// You can use other version
-	// Change library version below
-    ext.support_version = '27.0.2'
-    ext.glide_version = '4.6.1'
-    ext.androidsvg_version = '1.2.1'
-    ext.glide_slider_version = '1.3.1'
+    ext.support_version = '27.1.1'
+    ext.glide_version = '4.7.1'
+    ext.glide_slider_version = '1.3.2'
+	
+	// use this config if you want to load svg
+	//ext.glide_slider_version = '1.3.1'
+	//ext.androidsvg_version = '1.2.1'
 
     repositories {
+        google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath 'com.android.tools.build:gradle:3.1.3'
     }
 }
 
 allprojects {
-	repositories {
-		maven { url 'https://jitpack.io' }
-	}
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+        maven {
+            url "https://jitpack.io"
+        }
+    }
 }
 ```
 
@@ -82,15 +86,13 @@ There are some default indicators. If you want to use a provided indicator:
         android:gravity="center"/>
 ```
 
+```java
+Add <color name="glide_slider_indicator_color">#yourhex</color> to change indicator color.
+```
+
 ## Example
-- [version 1.0.0]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.0.0)
-- [version 1.0.1]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.0.1)
-- [version 1.0.2]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.0.2)
-- [version 1.1.0]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.1.0)
-- [version 1.1.1]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.1.1)
-- [version 1.2.0]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.2.0)
-- [version 1.3.0]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.3.0)
 - [version 1.3.1]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.3.1)
+- [version 1.3.2]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.3.2)
 
 ## Thanks
 

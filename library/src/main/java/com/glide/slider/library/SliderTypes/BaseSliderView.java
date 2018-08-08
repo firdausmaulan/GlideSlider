@@ -232,6 +232,7 @@ public abstract class BaseSliderView {
                                                         Target<Drawable> target,
                                                         boolean isFirstResource) {
                                 mProgressBar.setVisibility(View.GONE);
+                                triggerOnEndListener(false);
                                 return false;
                             }
 
@@ -242,6 +243,7 @@ public abstract class BaseSliderView {
                                                            DataSource dataSource,
                                                            boolean isFirstResource) {
                                 mProgressBar.setVisibility(View.GONE);
+                                triggerOnEndListener(true);
                                 return false;
                             }
                         }).into(targetImageView);
@@ -254,6 +256,7 @@ public abstract class BaseSliderView {
                                                         Target<Drawable> target,
                                                         boolean isFirstResource) {
                                 mProgressBar.setVisibility(View.GONE);
+                                triggerOnEndListener(false);
                                 return false;
                             }
 
@@ -264,6 +267,7 @@ public abstract class BaseSliderView {
                                                            DataSource dataSource,
                                                            boolean isFirstResource) {
                                 mProgressBar.setVisibility(View.GONE);
+                                triggerOnEndListener(true);
                                 return false;
                             }
                         }).into(targetImageView);
@@ -299,6 +303,12 @@ public abstract class BaseSliderView {
      */
     public Bundle getBundle() {
         return mBundle;
+    }
+
+    private void triggerOnEndListener(boolean result) {
+        if (mLoadListener != null) {
+            mLoadListener.onEnd(result, this);
+        }
     }
 
     public interface ImageLoadListener {

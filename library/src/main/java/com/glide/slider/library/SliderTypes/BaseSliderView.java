@@ -48,6 +48,8 @@ public abstract class BaseSliderView {
 
     private int mBackgroundColor = Color.BLACK;
 
+    private View targetImageView;
+
     /**
      * Ctor
      *
@@ -179,6 +181,7 @@ public abstract class BaseSliderView {
      * @param targetImageView where to place image
      */
     protected void bindEventAndShow(final View v, AppCompatImageView targetImageView) {
+        this.targetImageView = targetImageView;
         final BaseSliderView me = this;
 
         try {
@@ -243,6 +246,7 @@ public abstract class BaseSliderView {
                                                            DataSource dataSource,
                                                            boolean isFirstResource) {
                                 mProgressBar.setVisibility(View.GONE);
+                                triggerOnDrawableLoaded(resource);
                                 triggerOnEndListener(true);
                                 return false;
                             }
@@ -267,6 +271,7 @@ public abstract class BaseSliderView {
                                                            DataSource dataSource,
                                                            boolean isFirstResource) {
                                 mProgressBar.setVisibility(View.GONE);
+                                triggerOnDrawableLoaded(resource);
                                 triggerOnEndListener(true);
                                 return false;
                             }
@@ -311,9 +316,22 @@ public abstract class BaseSliderView {
         }
     }
 
-    public interface ImageLoadListener {
-        public void onStart(BaseSliderView target);
+    private void triggerOnDrawableLoaded(Drawable drawable) {
+        if (mLoadListener != null) {
+            mLoadListener.onDrawableLoaded(drawable);
+        }
+    }
 
-        public void onEnd(boolean result, BaseSliderView target);
+    protected View getTargetImageView() {
+        return this.targetImageView;
+    }
+
+    public interface ImageLoadListener {
+        void onStart(BaseSliderView target);
+
+        void onEnd(boolean result, BaseSliderView target);
+
+        // Get notified when the drawable is loaded to e.g. adjust view bounds
+        void onDrawableLoaded(Drawable drawable);
     }
 }

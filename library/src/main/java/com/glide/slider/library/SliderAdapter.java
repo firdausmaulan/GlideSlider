@@ -1,6 +1,7 @@
 package com.glide.slider.library;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
@@ -106,4 +107,8 @@ public class SliderAdapter extends PagerAdapter implements BaseSliderView.ImageL
         }
     }
 
+    @Override
+    public void onDrawableLoaded(Drawable drawable) {
+
+    }
 }

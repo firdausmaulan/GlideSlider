@@ -183,8 +183,8 @@ public abstract class BaseSliderView {
 
         try {
             v.findViewById(R.id.glide_slider_background).setBackgroundColor(mBackgroundColor);
-        } catch (NullPointerException e) {
-            e.printStackTrace();
+        } catch (NullPointerException ignored) {
+
         }
 
         v.setOnClickListener(new View.OnClickListener() {

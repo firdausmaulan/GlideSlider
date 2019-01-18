@@ -11,7 +11,8 @@ import android.view.View;
 import android.view.animation.Interpolator;
 import android.widget.RelativeLayout;
 
-import com.glide.slider.library.Animations.BaseAnimationInterface;
+import com.glide.slider.library.Animations.SliderAnimationInterface;
+import com.glide.slider.library.Animations.DescriptionAnimation;
 import com.glide.slider.library.Indicators.PagerIndicator;
 import com.glide.slider.library.SliderTypes.BaseSliderView;
 import com.glide.slider.library.Transformers.AccordionTransformer;
@@ -140,9 +141,9 @@ public class SliderLayout extends RelativeLayout {
     private BaseTransformer mViewPagerTransformer;
 
     /**
-     * @see com.glide.slider.library.Animations.BaseAnimationInterface
+     * @see SliderAnimationInterface
      */
-    private BaseAnimationInterface mCustomAnimation;
+    private SliderAnimationInterface mCustomAnimation;
 
     /**
      * {@link com.glide.slider.library.Indicators.PagerIndicator} shape, rect or oval.
@@ -450,12 +451,12 @@ public class SliderLayout extends RelativeLayout {
 
     /**
      * Inject your custom animation into PageTransformer, you can know more details in
-     * {@link com.glide.slider.library.Animations.BaseAnimationInterface},
-     * and you can see a example in {@link com.glide.slider.library.Animations.DescriptionAnimation}
+     * {@link SliderAnimationInterface},
+     * and you can see a example in {@link DescriptionAnimation}
      *
      * @param animation
      */
-    public void setCustomAnimation(BaseAnimationInterface animation) {
+    public void setCustomAnimation(SliderAnimationInterface animation) {
         mCustomAnimation = animation;
         if (mViewPagerTransformer != null) {
             mViewPagerTransformer.setCustomAnimationInterface(mCustomAnimation);

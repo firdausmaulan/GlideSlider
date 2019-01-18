@@ -1,37 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/glide_slider_background"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/black">
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/glide_slider_card_view"
+    style="@style/GlideSliderCardStyle">
 
-    <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/glide_slider_image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <RelativeLayout
+        android:id="@+id/glide_slider_background"
+        style="@style/GlideSliderBackgroundStyle">
 
-    <ProgressBar
-        android:id="@+id/loading_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true" />
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/glide_slider_image"
+            style="@style/GlideSliderImageStyle" />
 
-    <LinearLayout
-        android:id="@+id/description_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="#77000000"
-        android:gravity="center_vertical"
-        android:minHeight="30dp"
-        android:orientation="vertical"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        <ProgressBar
+            android:id="@+id/glide_slider_loading_bar"
+            style="@style/GlideSliderLoadingStyle" />
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#ffffff" />
-    </LinearLayout>
-</RelativeLayout>
+        <LinearLayout
+            android:id="@+id/glide_slider_description_layout"
+            style="@style/GlideSliderDescriptionBackgroundStyle">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/glide_slider_description"
+                style="@style/GlideSliderDescriptionTextStyle" />
+        </LinearLayout>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

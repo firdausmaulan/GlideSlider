@@ -20,7 +20,7 @@ public class TextSliderView extends BaseSliderView {
     public View getView() {
         View v = LayoutInflater.from(getContext()).inflate(R.layout.render_type_text, null);
         AppCompatImageView target = v.findViewById(R.id.glide_slider_image);
-        AppCompatTextView description = v.findViewById(R.id.description);
+        AppCompatTextView description = v.findViewById(R.id.glide_slider_description);
         description.setText(getDescription());
         bindEventAndShow(v, target);
         return v;

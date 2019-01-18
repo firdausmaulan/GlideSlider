@@ -1,7 +1,6 @@
 package com.glide.slider.library.SliderTypes;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -35,6 +34,7 @@ public abstract class BaseSliderView {
     private String mUrl;
     private File mFile;
     private int mRes;
+    private Glide mGlideUrl;
 
     public OnSliderClickListener mOnSliderClickListener;
 
@@ -46,7 +46,7 @@ public abstract class BaseSliderView {
 
     private boolean isProgressBarVisible = false;
 
-    private int mBackgroundColor = Color.BLACK;
+    private View targetImageView;
 
     /**
      * Ctor
@@ -75,7 +75,7 @@ public abstract class BaseSliderView {
      * @return
      */
     public BaseSliderView image(String url) {
-        if (mFile != null || mRes != 0) {
+        if (mFile != null || mRes != 0 || mGlideUrl != null) {
             throw new IllegalStateException("Call multi image function," +
                     "you only have permission to call it once");
         }
@@ -90,7 +90,7 @@ public abstract class BaseSliderView {
      * @return
      */
     public BaseSliderView image(File file) {
-        if (mUrl != null || mRes != 0) {
+        if (mUrl != null || mRes != 0 || mGlideUrl != null) {
             throw new IllegalStateException("Call multi image function," +
                     "you only have permission to call it once");
         }
@@ -99,11 +99,26 @@ public abstract class BaseSliderView {
     }
 
     public BaseSliderView image(int res) {
-        if (mUrl != null || mFile != null) {
+        if (mUrl != null || mFile != null || mGlideUrl != null) {
             throw new IllegalStateException("Call multi image function," +
                     "you only have permission to call it once");
         }
         mRes = res;
+        return this;
+    }
+
+    /**
+     * set a url as a image that preparing to load
+     *
+     * @param glideUrl
+     * @return
+     */
+    public BaseSliderView image(Glide glideUrl) {
+        if (mUrl != null || mFile != null || mRes != 0) {
+            throw new IllegalStateException("Call multi image function," +
+                    "you only have permission to call it once");
+        }
+        mGlideUrl = glideUrl;
         return this;
     }
 
@@ -163,29 +178,14 @@ public abstract class BaseSliderView {
     }
 
     /**
-     * set Background Color
-     *
-     * @param color
-     */
-    public BaseSliderView setBackgroundColor(int color) {
-        mBackgroundColor = color;
-        return this;
-    }
-
-    /**
      * When you want to implement your own slider view, please call this method in the end in `getView()` method
      *
      * @param v               the whole view
      * @param targetImageView where to place image
      */
     protected void bindEventAndShow(final View v, AppCompatImageView targetImageView) {
+        this.targetImageView = targetImageView;
         final BaseSliderView me = this;
-
-        try {
-            v.findViewById(R.id.glide_slider_background).setBackgroundColor(mBackgroundColor);
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
 
         v.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -203,7 +203,7 @@ public abstract class BaseSliderView {
             mLoadListener.onStart(me);
         }
 
-        final ProgressBar mProgressBar = v.findViewById(R.id.loading_bar);
+        final ProgressBar mProgressBar = v.findViewById(R.id.glide_slider_loading_bar);
         if (isProgressBarVisible) {
             mProgressBar.setVisibility(View.VISIBLE);
         } else {
@@ -217,6 +217,8 @@ public abstract class BaseSliderView {
             imageToLoad = mFile;
         } else if (mRes != 0) {
             imageToLoad = mRes;
+        } else if (mGlideUrl != null) {
+            imageToLoad = mGlideUrl;
         }
 
         RequestBuilder<Drawable> requestBuilder = Glide.with(mContext).as(Drawable.class);
@@ -232,6 +234,7 @@ public abstract class BaseSliderView {
                                                         Target<Drawable> target,
                                                         boolean isFirstResource) {
                                 mProgressBar.setVisibility(View.GONE);
+                                triggerOnEndListener(false);
                                 return false;
                             }
 
@@ -242,6 +245,8 @@ public abstract class BaseSliderView {
                                                            DataSource dataSource,
                                                            boolean isFirstResource) {
                                 mProgressBar.setVisibility(View.GONE);
+                                triggerOnDrawableLoaded(resource);
+                                triggerOnEndListener(true);
                                 return false;
                             }
                         }).into(targetImageView);
@@ -254,6 +259,7 @@ public abstract class BaseSliderView {
                                                         Target<Drawable> target,
                                                         boolean isFirstResource) {
                                 mProgressBar.setVisibility(View.GONE);
+                                triggerOnEndListener(false);
                                 return false;
                             }
 
@@ -264,6 +270,8 @@ public abstract class BaseSliderView {
                                                            DataSource dataSource,
                                                            boolean isFirstResource) {
                                 mProgressBar.setVisibility(View.GONE);
+                                triggerOnDrawableLoaded(resource);
+                                triggerOnEndListener(true);
                                 return false;
                             }
                         }).into(targetImageView);
@@ -301,9 +309,28 @@ public abstract class BaseSliderView {
         return mBundle;
     }
 
-    public interface ImageLoadListener {
-        public void onStart(BaseSliderView target);
+    private void triggerOnEndListener(boolean result) {
+        if (mLoadListener != null) {
+            mLoadListener.onEnd(result, this);
+        }
+    }
 
-        public void onEnd(boolean result, BaseSliderView target);
+    private void triggerOnDrawableLoaded(Drawable drawable) {
+        if (mLoadListener != null) {
+            mLoadListener.onDrawableLoaded(drawable);
+        }
+    }
+
+    protected View getTargetImageView() {
+        return this.targetImageView;
+    }
+
+    public interface ImageLoadListener {
+        void onStart(BaseSliderView target);
+
+        void onEnd(boolean result, BaseSliderView target);
+
+        // Get notified when the drawable is loaded to e.g. adjust view bounds
+        void onDrawableLoaded(Drawable drawable);
     }
 }

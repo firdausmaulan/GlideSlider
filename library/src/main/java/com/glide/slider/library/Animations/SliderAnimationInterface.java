@@ -15,10 +15,10 @@ import android.view.View;
  * <p>
  * When you finish drag, the onCurrentItemDisappear and onNextItemAppear will be invoked.
  * <p>
- * You can see a demo class {@link com.glide.slider.library.Animations.DescriptionAnimation},
+ * You can see a demo class {@link DescriptionAnimation},
  * this class gives the description text an animation.
  */
-public interface BaseAnimationInterface {
+public interface SliderAnimationInterface {
 
     /**
      * When the current item prepare to start leaving the screen.

@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/glide_slider_background"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/black">
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/glide_slider_card_view"
+    style="@style/GlideSliderCardStyle">
 
-    <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/glide_slider_image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <RelativeLayout
+        android:id="@+id/glide_slider_background"
+        style="@style/GlideSliderBackgroundStyle">
 
-    <ProgressBar
-        android:id="@+id/loading_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true" />
-</RelativeLayout>
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/glide_slider_image"
+            style="@style/GlideSliderImageStyle" />
+
+        <ProgressBar
+            android:id="@+id/glide_slider_loading_bar"
+            style="@style/GlideSliderLoadingStyle" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

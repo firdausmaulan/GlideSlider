@@ -2,7 +2,7 @@ package com.glide.slider.library.Transformers;
 
 import android.view.View;
 
-import com.glide.slider.library.Animations.BaseAnimationInterface;
+import com.glide.slider.library.Animations.SliderAnimationInterface;
 import com.glide.slider.library.Tricks.ViewPagerEx;
 
 import java.util.ArrayList;
@@ -17,14 +17,14 @@ import java.util.HashMap;
  * After you call setPageTransformer(), transformPage() will be called by {@link com.glide.slider.library.Tricks.ViewPagerEx}
  * when your slider are animating.
  * <p>
- * In onPreTransform() function, that will make {@link com.glide.slider.library.Animations.BaseAnimationInterface}
+ * In onPreTransform() function, that will make {@link SliderAnimationInterface}
  * work.
  * <p>
  * if you want to make an acceptable transformer, please do not forget to extend from this class.
  */
 public abstract class BaseTransformer implements ViewPagerEx.PageTransformer {
 
-    private BaseAnimationInterface mCustomAnimationInterface;
+    private SliderAnimationInterface mCustomAnimationInterface;
 
     /**
      * Called each {@link #transformPage(View, float)}.
@@ -145,7 +145,7 @@ public abstract class BaseTransformer implements ViewPagerEx.PageTransformer {
     }
 
 
-    public void setCustomAnimationInterface(BaseAnimationInterface animationInterface) {
+    public void setCustomAnimationInterface(SliderAnimationInterface animationInterface) {
         mCustomAnimationInterface = animationInterface;
     }
 

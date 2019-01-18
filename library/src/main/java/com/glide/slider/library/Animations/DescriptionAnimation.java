@@ -7,16 +7,16 @@ import android.view.View;
 import com.glide.slider.library.R;
 
 /**
- * A demo class to show how to use {@link com.glide.slider.library.Animations.BaseAnimationInterface}
+ * A demo class to show how to use {@link SliderAnimationInterface}
  * to make  your custom animation in {@link com.glide.slider.library.Tricks.ViewPagerEx.PageTransformer} action.
  */
-public class DescriptionAnimation implements BaseAnimationInterface {
+public class DescriptionAnimation implements SliderAnimationInterface {
 
     @Override
     public void onPrepareCurrentItemLeaveScreen(View current) {
-        View descriptionLayout = current.findViewById(R.id.description_layout);
+        View descriptionLayout = current.findViewById(R.id.glide_slider_description_layout);
         if (descriptionLayout != null) {
-            current.findViewById(R.id.description_layout).setVisibility(View.INVISIBLE);
+            current.findViewById(R.id.glide_slider_description_layout).setVisibility(View.INVISIBLE);
         }
     }
 
@@ -27,9 +27,9 @@ public class DescriptionAnimation implements BaseAnimationInterface {
      */
     @Override
     public void onPrepareNextItemShowInScreen(View next) {
-        View descriptionLayout = next.findViewById(R.id.description_layout);
+        View descriptionLayout = next.findViewById(R.id.glide_slider_description_layout);
         if (descriptionLayout != null) {
-            next.findViewById(R.id.description_layout).setVisibility(View.INVISIBLE);
+            next.findViewById(R.id.glide_slider_description_layout).setVisibility(View.INVISIBLE);
         }
     }
 
@@ -48,10 +48,10 @@ public class DescriptionAnimation implements BaseAnimationInterface {
     @Override
     public void onNextItemAppear(View view) {
 
-        View descriptionLayout = view.findViewById(R.id.description_layout);
+        View descriptionLayout = view.findViewById(R.id.glide_slider_description_layout);
         if (descriptionLayout != null) {
             float layoutY = descriptionLayout.getY();
-            view.findViewById(R.id.description_layout).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.glide_slider_description_layout).setVisibility(View.VISIBLE);
             ValueAnimator animator = ObjectAnimator.ofFloat(
                     descriptionLayout,
                     "y",

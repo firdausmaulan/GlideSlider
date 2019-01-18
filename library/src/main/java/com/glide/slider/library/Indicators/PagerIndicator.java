@@ -19,7 +19,6 @@ import com.glide.slider.library.Tricks.InfinitePagerAdapter;
 import com.glide.slider.library.Tricks.ViewPagerEx;
 
 import java.util.ArrayList;
-import java.util.logging.Handler;
 
 /**
  * Pager Indicator.

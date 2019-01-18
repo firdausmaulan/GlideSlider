@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
 group = 'com.github.firdausmaulan'
 
 android {
@@ -7,8 +8,8 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.min_sdk_version as Integer
         targetSdkVersion rootProject.ext.target_sdk_version as Integer
-        versionCode 16
-        versionName "1.3.3"
+        versionCode 17
+        versionName "1.4.0"
     }
     buildTypes {
         release {

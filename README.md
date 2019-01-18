@@ -90,6 +90,7 @@ There are some default indicators. If you want to use a provided indicator:
 ```
 
 You can customize this library via style.xml or color.xml
+
 style.xml
 ```java
 <?xml version="1.0" encoding="utf-8"?>

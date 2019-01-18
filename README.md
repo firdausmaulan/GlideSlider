@@ -72,7 +72,7 @@ If you want to load images from drawable, then no additional permissions are nec
 
 Add the Slider to your layout:
  
-```java
+```xml
 <com.glide.slider.library.SliderLayout
         android:id="@+id/slider"
         android:layout_width="match_parent"
@@ -81,7 +81,7 @@ Add the Slider to your layout:
  
 There are some default indicators. If you want to use a provided indicator:
  
-```java
+```xml
 <com.glide.slider.library.Indicators.PagerIndicator
         android:id="@+id/custom_indicator"
         android:layout_width="wrap_content"
@@ -89,10 +89,10 @@ There are some default indicators. If you want to use a provided indicator:
         android:gravity="center"/>
 ```
 
-You can customize this library via style.xml or color.xml
+You can customize this library via styles.xml or colors.xml
 
-style.xml
-```java
+styles.xml
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
@@ -139,8 +139,8 @@ style.xml
 </resources>
 ```
 
-color.xml
-```
+colors.xml
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="glide_slider_background_color">#000000</color>

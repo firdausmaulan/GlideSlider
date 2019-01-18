@@ -5,6 +5,8 @@
  
 ![](http://ww3.sinaimg.cn/mw690/610dc034jw1egzor66ojdg20950fknpe.gif)
  
+![](https://s2.gifyu.com/images/glide_slider.gif)
+ 
 ## Usage
 
 ### Step 1

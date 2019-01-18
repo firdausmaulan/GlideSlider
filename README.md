@@ -19,7 +19,7 @@ buildscript {
     ext.target_sdk_version = 28
     ext.support_version = '28.0.0'
     ext.glide_version = '4.8.0'
-    ext.glide_slider_version = '1.3.2'
+    ext.glide_slider_version = '1.4.0'
 	
 	// use this config if you want to load svg
 	//ext.glide_slider_version = '1.3.1'

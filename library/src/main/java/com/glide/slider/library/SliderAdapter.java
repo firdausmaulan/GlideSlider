@@ -7,7 +7,7 @@ import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.glide.slider.library.SliderTypes.BaseSliderView;
+import com.glide.slider.library.sliderTypes.BaseSliderView;
 
 import java.util.ArrayList;
 

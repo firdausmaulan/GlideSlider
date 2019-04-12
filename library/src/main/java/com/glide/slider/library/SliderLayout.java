@@ -125,6 +125,8 @@ public class SliderLayout extends RelativeLayout {
 
     private boolean mAutoCycle;
 
+    private boolean mStopCyclingWhenTouch = true;
+
     /**
      * the duration between animation.
      */
@@ -189,7 +191,7 @@ public class SliderLayout extends RelativeLayout {
                 int action = event.getAction();
                 switch (action) {
                     case MotionEvent.ACTION_UP:
-                        recoverCycle();
+                        if (mStopCyclingWhenTouch) recoverCycle();
                         break;
                 }
                 return false;
@@ -347,7 +349,7 @@ public class SliderLayout extends RelativeLayout {
         int action = ev.getAction();
         switch (action) {
             case MotionEvent.ACTION_DOWN:
-                pauseAutoCycle();
+                if (mStopCyclingWhenTouch) pauseAutoCycle();
                 break;
         }
         return false;
@@ -658,11 +660,12 @@ public class SliderLayout extends RelativeLayout {
 
     /**
      * Get number of slider inside the SliderAdapter
+     *
      * @return
      */
     public int getSliderImageCount() {
         SliderAdapter adapter = getRealAdapter();
-        if(adapter != null) {
+        if (adapter != null) {
             return adapter.getCount();
         } else {
             return 0;
@@ -717,5 +720,9 @@ public class SliderLayout extends RelativeLayout {
 
     public void moveNextPosition() {
         moveNextPosition(true);
+    }
+
+    public void stopCyclingWhenTouch(boolean isStopCyclingWhenTouch) {
+        mStopCyclingWhenTouch = isStopCyclingWhenTouch;
     }
 }

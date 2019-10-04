@@ -13,26 +13,16 @@
 
 #### Gradle
 
+add jitpack.io
+
 ```groovy
 buildscript {
-
-    ext.compile_sdk_version = 28
-    ext.min_sdk_version = 14
-    ext.target_sdk_version = 28
-    ext.support_version = '28.0.0'
-    ext.glide_version = '4.9.0'
-    ext.glide_slider_version = '1.4.1'
-	
-	// use this config if you want to load svg
-	//ext.glide_slider_version = '1.3.1'
-	//ext.androidsvg_version = '1.2.1'
-
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'com.android.tools.build:gradle:3.5.1'
     }
 }
 
@@ -48,9 +38,15 @@ allprojects {
 }
 ```
 
+add GlideSlider
+
 ```groovy
 dependencies {
-    implementation "com.github.firdausmaulan:GlideSlider:$glide_slider_version"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation "com.github.bumptech.glide:glide:4.9.0"
+    annotationProcessor "com.github.bumptech.glide:compiler:4.9.0"
+    
+    implementation "com.github.firdausmaulan:GlideSlider:1.5.1"
 }
 ```
 
@@ -84,7 +80,7 @@ Add the Slider to your layout:
 There are some default indicators. If you want to use a provided indicator:
  
 ```xml
-<com.glide.slider.library.Indicators.PagerIndicator
+<com.glide.slider.library.indicators.PagerIndicator
         android:id="@+id/custom_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -153,9 +149,7 @@ colors.xml
 ```
 
 ## Example
-- [version 1.3.1]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.3.1)
-- [version 1.3.2]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.3.2)
-- [version 1.4.0]https://github.com/firdausmaulan/GlideSlider-Example/tree/feature/1.4.0)
+- [Example Project]https://github.com/firdausmaulan/GlideSlider-Example)
 
 ## Thanks
 

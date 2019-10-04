@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.glide.slider.library.Tricks.InfiniteViewPager
+    <com.glide.slider.library.tricks.InfiniteViewPager
         android:id="@+id/glide_slider_viewpager"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <com.glide.slider.library.Indicators.PagerIndicator
+    <com.glide.slider.library.indicators.PagerIndicator
         android:id="@+id/default_center_bottom_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
         android:paddingBottom="10dp"
         custom:shape="oval" />
 
-    <com.glide.slider.library.Indicators.PagerIndicator
+    <com.glide.slider.library.indicators.PagerIndicator
         android:id="@+id/default_bottom_right_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
         android:paddingBottom="10dp"
         android:paddingRight="10dp" />
 
-    <com.glide.slider.library.Indicators.PagerIndicator
+    <com.glide.slider.library.indicators.PagerIndicator
         android:id="@+id/default_bottom_left_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
         android:paddingBottom="10dp"
         android:paddingLeft="10dp" />
 
-    <com.glide.slider.library.Indicators.PagerIndicator
+    <com.glide.slider.library.indicators.PagerIndicator
         android:id="@+id/default_center_top_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
         android:gravity="center"
         android:paddingTop="10dp" />
 
-    <com.glide.slider.library.Indicators.PagerIndicator
+    <com.glide.slider.library.indicators.PagerIndicator
         android:id="@+id/default_center_top_right_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
         android:paddingRight="10dp"
         android:paddingTop="10dp" />
 
-    <com.glide.slider.library.Indicators.PagerIndicator
+    <com.glide.slider.library.indicators.PagerIndicator
         android:id="@+id/default_center_top_left_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

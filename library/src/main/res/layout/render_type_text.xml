@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/glide_slider_card_view"
     style="@style/GlideSliderCardStyle">
@@ -8,7 +8,7 @@
         android:id="@+id/glide_slider_background"
         style="@style/GlideSliderBackgroundStyle">
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/glide_slider_image"
             style="@style/GlideSliderImageStyle" />
 
@@ -20,9 +20,9 @@
             android:id="@+id/glide_slider_description_layout"
             style="@style/GlideSliderDescriptionBackgroundStyle">
 
-            <android.support.v7.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/glide_slider_description"
                 style="@style/GlideSliderDescriptionTextStyle" />
         </LinearLayout>
     </RelativeLayout>
-</android.support.v7.widget.CardView>
+</androidx.cardview.widget.CardView>

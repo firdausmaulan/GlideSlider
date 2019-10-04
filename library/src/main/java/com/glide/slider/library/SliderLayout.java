@@ -3,7 +3,7 @@ package com.glide.slider.library;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Message;
-import android.support.v4.view.PagerAdapter;
+import androidx.viewpager.widget.PagerAdapter;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -11,39 +11,39 @@ import android.view.View;
 import android.view.animation.Interpolator;
 import android.widget.RelativeLayout;
 
-import com.glide.slider.library.Animations.SliderAnimationInterface;
-import com.glide.slider.library.Animations.DescriptionAnimation;
-import com.glide.slider.library.Indicators.PagerIndicator;
-import com.glide.slider.library.SliderTypes.BaseSliderView;
-import com.glide.slider.library.Transformers.AccordionTransformer;
-import com.glide.slider.library.Transformers.BackgroundToForegroundTransformer;
-import com.glide.slider.library.Transformers.BaseTransformer;
-import com.glide.slider.library.Transformers.CubeInTransformer;
-import com.glide.slider.library.Transformers.DefaultTransformer;
-import com.glide.slider.library.Transformers.DepthPageTransformer;
-import com.glide.slider.library.Transformers.FadeTransformer;
-import com.glide.slider.library.Transformers.FlipHorizontalTransformer;
-import com.glide.slider.library.Transformers.FlipPageViewTransformer;
-import com.glide.slider.library.Transformers.ForegroundToBackgroundTransformer;
-import com.glide.slider.library.Transformers.RotateDownTransformer;
-import com.glide.slider.library.Transformers.RotateUpTransformer;
-import com.glide.slider.library.Transformers.StackTransformer;
-import com.glide.slider.library.Transformers.TabletTransformer;
-import com.glide.slider.library.Transformers.ZoomInTransformer;
-import com.glide.slider.library.Transformers.ZoomOutSlideTransformer;
-import com.glide.slider.library.Transformers.ZoomOutTransformer;
-import com.glide.slider.library.Tricks.FixedSpeedScroller;
-import com.glide.slider.library.Tricks.InfinitePagerAdapter;
-import com.glide.slider.library.Tricks.InfiniteViewPager;
-import com.glide.slider.library.Tricks.ViewPagerEx;
+import com.glide.slider.library.animations.SliderAnimationInterface;
+import com.glide.slider.library.animations.DescriptionAnimation;
+import com.glide.slider.library.indicators.PagerIndicator;
+import com.glide.slider.library.slidertypes.BaseSliderView;
+import com.glide.slider.library.transformers.AccordionTransformer;
+import com.glide.slider.library.transformers.BackgroundToForegroundTransformer;
+import com.glide.slider.library.transformers.BaseTransformer;
+import com.glide.slider.library.transformers.CubeInTransformer;
+import com.glide.slider.library.transformers.DefaultTransformer;
+import com.glide.slider.library.transformers.DepthPageTransformer;
+import com.glide.slider.library.transformers.FadeTransformer;
+import com.glide.slider.library.transformers.FlipHorizontalTransformer;
+import com.glide.slider.library.transformers.FlipPageViewTransformer;
+import com.glide.slider.library.transformers.ForegroundToBackgroundTransformer;
+import com.glide.slider.library.transformers.RotateDownTransformer;
+import com.glide.slider.library.transformers.RotateUpTransformer;
+import com.glide.slider.library.transformers.StackTransformer;
+import com.glide.slider.library.transformers.TabletTransformer;
+import com.glide.slider.library.transformers.ZoomInTransformer;
+import com.glide.slider.library.transformers.ZoomOutSlideTransformer;
+import com.glide.slider.library.transformers.ZoomOutTransformer;
+import com.glide.slider.library.tricks.FixedSpeedScroller;
+import com.glide.slider.library.tricks.InfinitePagerAdapter;
+import com.glide.slider.library.tricks.InfiniteViewPager;
+import com.glide.slider.library.tricks.ViewPagerEx;
 
 import java.lang.reflect.Field;
 import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * SliderLayout is compound layout. This is combined with {@link com.glide.slider.library.Indicators.PagerIndicator}
- * and {@link com.glide.slider.library.Tricks.ViewPagerEx} .
+ * SliderLayout is compound layout. This is combined with {@link com.glide.slider.library.indicators.PagerIndicator}
+ * and {@link com.glide.slider.library.tricks.ViewPagerEx} .
  * <p>
  * There is some properties you can set in XML:
  * <p>
@@ -96,30 +96,30 @@ public class SliderLayout extends RelativeLayout {
     private SliderAdapter mSliderAdapter;
 
     /**
-     * {@link com.glide.slider.library.Tricks.ViewPagerEx} indicator.
+     * {@link com.glide.slider.library.tricks.ViewPagerEx} indicator.
      */
     private PagerIndicator mIndicator;
 
 
     /**
-     * A timer and a TimerTask using to cycle the {@link com.glide.slider.library.Tricks.ViewPagerEx}.
+     * A timer and a TimerTask using to cycle the {@link com.glide.slider.library.tricks.ViewPagerEx}.
      */
     private Timer mCycleTimer;
     private TimerTask mCycleTask;
 
     /**
-     * For resuming the cycle, after user touch or click the {@link com.glide.slider.library.Tricks.ViewPagerEx}.
+     * For resuming the cycle, after user touch or click the {@link com.glide.slider.library.tricks.ViewPagerEx}.
      */
     private Timer mResumingTimer;
     private TimerTask mResumingTask;
 
     /**
-     * If {@link com.glide.slider.library.Tricks.ViewPagerEx} is Cycling
+     * If {@link com.glide.slider.library.tricks.ViewPagerEx} is Cycling
      */
     private boolean mCycling;
 
     /**
-     * Determine if auto recover after user touch the {@link com.glide.slider.library.Tricks.ViewPagerEx}
+     * Determine if auto recover after user touch the {@link com.glide.slider.library.tricks.ViewPagerEx}
      */
     private boolean mAutoRecover = true;
 
@@ -133,12 +133,12 @@ public class SliderLayout extends RelativeLayout {
     private long mSliderDuration = 4000;
 
     /**
-     * Visibility of {@link com.glide.slider.library.Indicators.PagerIndicator}
+     * Visibility of {@link com.glide.slider.library.indicators.PagerIndicator}
      */
     private PagerIndicator.IndicatorVisibility mIndicatorVisibility = PagerIndicator.IndicatorVisibility.Visible;
 
     /**
-     * {@link com.glide.slider.library.Tricks.ViewPagerEx} 's transformer
+     * {@link com.glide.slider.library.tricks.ViewPagerEx} 's transformer
      */
     private BaseTransformer mViewPagerTransformer;
 
@@ -148,7 +148,7 @@ public class SliderLayout extends RelativeLayout {
     private SliderAnimationInterface mCustomAnimation;
 
     /**
-     * {@link com.glide.slider.library.Indicators.PagerIndicator} shape, rect or oval.
+     * {@link com.glide.slider.library.indicators.PagerIndicator} shape, rect or oval.
      */
 
     public SliderLayout(Context context) {
@@ -550,7 +550,7 @@ public class SliderLayout extends RelativeLayout {
     }
 
     /**
-     * get the {@link com.glide.slider.library.Indicators.PagerIndicator} instance.
+     * get the {@link com.glide.slider.library.indicators.PagerIndicator} instance.
      * You can manipulate the properties of the indicator.
      *
      * @return

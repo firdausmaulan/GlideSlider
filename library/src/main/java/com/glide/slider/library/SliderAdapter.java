@@ -2,12 +2,12 @@ package com.glide.slider.library;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.v4.view.PagerAdapter;
+import androidx.annotation.NonNull;
+import androidx.viewpager.widget.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.glide.slider.library.SliderTypes.BaseSliderView;
+import com.glide.slider.library.slidertypes.BaseSliderView;
 
 import java.util.ArrayList;
 

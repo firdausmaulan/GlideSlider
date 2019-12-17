@@ -149,7 +149,7 @@ colors.xml
 ```
 
 ## Example
-- [Example Project]https://github.com/firdausmaulan/GlideSlider-Example)
+- [Example Project](https://github.com/firdausmaulan/GlideSlider-Example)
 
 ## Thanks
 

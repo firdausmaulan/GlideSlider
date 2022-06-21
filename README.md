@@ -18,19 +18,7 @@ add jitpack.io
 ```groovy
 buildscript {
     repositories {
-        google()
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.1'
-    }
-}
-
-allprojects {
-    repositories {
-        google()
-        jcenter()
-        mavenCentral()
+        ...
         maven {
             url "https://jitpack.io"
         }
@@ -42,11 +30,7 @@ add GlideSlider
 
 ```groovy
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation "com.github.bumptech.glide:glide:4.9.0"
-    annotationProcessor "com.github.bumptech.glide:compiler:4.9.0"
-    
-    implementation "com.github.firdausmaulan:GlideSlider:1.5.1"
+    implementation "com.github.firdausmaulan:GlideSlider:1.5.2"
 }
 ```
 

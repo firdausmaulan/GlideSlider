@@ -1,13 +1,17 @@
 package com.glide.slider.library;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
+
+import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.animation.Interpolator;
 import android.widget.RelativeLayout;
 
@@ -38,6 +42,7 @@ import com.glide.slider.library.tricks.InfiniteViewPager;
 import com.glide.slider.library.tricks.ViewPagerEx;
 
 import java.lang.reflect.Field;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -88,12 +93,12 @@ public class SliderLayout extends RelativeLayout {
     /**
      * InfiniteViewPager is extended from ViewPagerEx. As the name says, it can scroll without bounder.
      */
-    private InfiniteViewPager mViewPager;
+    private final InfiniteViewPager mViewPager;
 
     /**
      * InfiniteViewPager adapter.
      */
-    private SliderAdapter mSliderAdapter;
+    private final SliderAdapter mSliderAdapter;
 
     /**
      * {@link com.glide.slider.library.tricks.ViewPagerEx} indicator.
@@ -159,18 +164,16 @@ public class SliderLayout extends RelativeLayout {
         this(context, attrs, R.attr.SliderStyle);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     public SliderLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         LayoutInflater.from(context).inflate(R.layout.slider_layout, this, true);
 
-        final TypedArray attributes = context.getTheme().obtainStyledAttributes(attrs, R.styleable.SliderLayout,
-                defStyle, 0);
-
-        /*
-      {@link com.glide.slider.library.Tricks.ViewPagerEx} transformer time span.
-     */
-        int mTransformerSpan = attributes.getInteger(R.styleable.SliderLayout_pager_animation_span, 1100);
-        int mTransformerId = attributes.getInt(R.styleable.SliderLayout_pager_animation, Transformer.Default.ordinal());
+        int mTransformerSpan;
+        int mTransformerId;
+        TypedArray attributes = context.getTheme().obtainStyledAttributes(attrs, R.styleable.SliderLayout, defStyle, 0);
+        mTransformerSpan = attributes.getInteger(R.styleable.SliderLayout_pager_animation_span, 1100);
+        mTransformerId = attributes.getInt(R.styleable.SliderLayout_pager_animation, Transformer.Default.ordinal());
         mAutoCycle = attributes.getBoolean(R.styleable.SliderLayout_auto_cycle, true);
         int visibility = attributes.getInt(R.styleable.SliderLayout_indicator_visibility, 0);
         for (PagerIndicator.IndicatorVisibility v : PagerIndicator.IndicatorVisibility.values()) {
@@ -179,23 +182,18 @@ public class SliderLayout extends RelativeLayout {
                 break;
             }
         }
-        mSliderAdapter = new SliderAdapter(context);
+        mSliderAdapter = new SliderAdapter();
         PagerAdapter wrappedAdapter = new InfinitePagerAdapter(mSliderAdapter);
 
-        mViewPager = (InfiniteViewPager) findViewById(R.id.glide_slider_viewpager);
+        mViewPager = findViewById(R.id.glide_slider_viewpager);
         mViewPager.setAdapter(wrappedAdapter);
 
-        mViewPager.setOnTouchListener(new OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                int action = event.getAction();
-                switch (action) {
-                    case MotionEvent.ACTION_UP:
-                        if (mStopCyclingWhenTouch) recoverCycle();
-                        break;
-                }
-                return false;
+        mViewPager.setOnTouchListener((v, event) -> {
+            int action = event.getAction();
+            if (action == MotionEvent.ACTION_UP) {
+                if (mStopCyclingWhenTouch) recoverCycle();
             }
+            return false;
         });
 
         attributes.recycle();
@@ -232,9 +230,9 @@ public class SliderLayout extends RelativeLayout {
         mSliderAdapter.addSlider(imageContent);
     }
 
-    private android.os.Handler mh = new android.os.Handler() {
+    private final Handler mh = new Handler(Looper.getMainLooper()) {
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
             moveNextPosition(true);
         }
@@ -347,10 +345,8 @@ public class SliderLayout extends RelativeLayout {
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         int action = ev.getAction();
-        switch (action) {
-            case MotionEvent.ACTION_DOWN:
-                if (mStopCyclingWhenTouch) pauseAutoCycle();
-                break;
+        if (action == MotionEvent.ACTION_DOWN) {
+            if (mStopCyclingWhenTouch) pauseAutoCycle();
         }
         return false;
     }
@@ -408,20 +404,19 @@ public class SliderLayout extends RelativeLayout {
 
         private final String name;
 
-        private Transformer(String s) {
+        Transformer(String s) {
             name = s;
         }
 
+        @NonNull
         public String toString() {
-            return name;
+            return String.valueOf(name);
         }
 
         public boolean equals(String other) {
-            return other != null && name.equals(other);
+            return name.equals(other);
         }
     }
-
-    ;
 
     /**
      * set a preset viewpager transformer by id.
@@ -474,57 +469,24 @@ public class SliderLayout extends RelativeLayout {
         //
         // special thanks to https://github.com/ToxicBakery/ViewPagerTransforms
         //
-        BaseTransformer t = null;
-        switch (ts) {
-            case Default:
-                t = new DefaultTransformer();
-                break;
-            case Accordion:
-                t = new AccordionTransformer();
-                break;
-            case Background2Foreground:
-                t = new BackgroundToForegroundTransformer();
-                break;
-            case CubeIn:
-                t = new CubeInTransformer();
-                break;
-            case DepthPage:
-                t = new DepthPageTransformer();
-                break;
-            case Fade:
-                t = new FadeTransformer();
-                break;
-            case FlipHorizontal:
-                t = new FlipHorizontalTransformer();
-                break;
-            case FlipPage:
-                t = new FlipPageViewTransformer();
-                break;
-            case Foreground2Background:
-                t = new ForegroundToBackgroundTransformer();
-                break;
-            case RotateDown:
-                t = new RotateDownTransformer();
-                break;
-            case RotateUp:
-                t = new RotateUpTransformer();
-                break;
-            case Stack:
-                t = new StackTransformer();
-                break;
-            case Tablet:
-                t = new TabletTransformer();
-                break;
-            case ZoomIn:
-                t = new ZoomInTransformer();
-                break;
-            case ZoomOutSlide:
-                t = new ZoomOutSlideTransformer();
-                break;
-            case ZoomOut:
-                t = new ZoomOutTransformer();
-                break;
-        }
+        BaseTransformer t = switch (ts) {
+            case Default -> new DefaultTransformer();
+            case Accordion -> new AccordionTransformer();
+            case Background2Foreground -> new BackgroundToForegroundTransformer();
+            case CubeIn -> new CubeInTransformer();
+            case DepthPage -> new DepthPageTransformer();
+            case Fade -> new FadeTransformer();
+            case FlipHorizontal -> new FlipHorizontalTransformer();
+            case FlipPage -> new FlipPageViewTransformer();
+            case Foreground2Background -> new ForegroundToBackgroundTransformer();
+            case RotateDown -> new RotateDownTransformer();
+            case RotateUp -> new RotateUpTransformer();
+            case Stack -> new StackTransformer();
+            case Tablet -> new TabletTransformer();
+            case ZoomIn -> new ZoomInTransformer();
+            case ZoomOutSlide -> new ZoomOutSlideTransformer();
+            case ZoomOut -> new ZoomOutTransformer();
+        };
         setPagerTransformer(true, t);
     }
 
@@ -543,7 +505,7 @@ public class SliderLayout extends RelativeLayout {
     }
 
     public PagerIndicator.IndicatorVisibility getIndicatorVisibility() {
-        if (mIndicator == null) {
+        if (mIndicator != null) {
             return mIndicator.getIndicatorVisibility();
         }
         return PagerIndicator.IndicatorVisibility.Invisible;
@@ -570,13 +532,14 @@ public class SliderLayout extends RelativeLayout {
         private final String name;
         private final int id;
 
-        private PresetIndicators(String name, int id) {
+        PresetIndicators(String name, int id) {
             this.name = name;
             this.id = id;
         }
 
+        @NonNull
         public String toString() {
-            return name;
+            return String.valueOf(name);
         }
 
         public int getResourceId() {
@@ -585,7 +548,7 @@ public class SliderLayout extends RelativeLayout {
     }
 
     public void setPresetIndicator(PresetIndicators presetIndicator) {
-        PagerIndicator pagerIndicator = (PagerIndicator) findViewById(presetIndicator.getResourceId());
+        PagerIndicator pagerIndicator = findViewById(presetIndicator.getResourceId());
         setCustomIndicator(pagerIndicator);
     }
 

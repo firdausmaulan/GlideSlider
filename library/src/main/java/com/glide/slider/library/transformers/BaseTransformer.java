@@ -9,6 +9,7 @@ import com.glide.slider.library.tricks.ViewPagerEx;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 /**
  * This is all transformers father.
@@ -30,13 +31,10 @@ public abstract class BaseTransformer implements ViewPagerEx.PageTransformer {
 
     /**
      * Called each {@link #transformPage(View, float)}.
-     *
-     * @param view
-     * @param position
      */
     protected abstract void onTransform(View view, float position);
 
-    private HashMap<View, ArrayList<Float>> h = new HashMap<View, ArrayList<Float>>();
+    private final HashMap<View, ArrayList<Float>> h = new HashMap<>();
 
     @Override
     public void transformPage(View view, float position) {
@@ -48,8 +46,6 @@ public abstract class BaseTransformer implements ViewPagerEx.PageTransformer {
     /**
      * If the position offset of a fragment is less than negative one or greater than one, returning true will set the
      * visibility of the fragment to {@link View#GONE}. Returning false will force the fragment to {@link View#VISIBLE}.
-     *
-     * @return
      */
     private boolean hideOffscreenPages() {
         return true;
@@ -57,8 +53,6 @@ public abstract class BaseTransformer implements ViewPagerEx.PageTransformer {
 
     /**
      * Indicates if the default animations of the view pager should be used.
-     *
-     * @return
      */
     protected boolean isPagingEnabled() {
         return false;
@@ -66,9 +60,6 @@ public abstract class BaseTransformer implements ViewPagerEx.PageTransformer {
 
     /**
      * Called each {@link #transformPage(View, float)} before {{@link #onTransform(View, float)} is called.
-     *
-     * @param view
-     * @param position
      */
     private void onPreTransform(View view, float position) {
         final float width = view.getWidth();
@@ -89,15 +80,15 @@ public abstract class BaseTransformer implements ViewPagerEx.PageTransformer {
             view.setAlpha(1f);
         }
         if (mCustomAnimationInterface != null) {
-            if (!h.containsKey(view) || h.get(view).size() == 1) {
+            if (!h.containsKey(view) || Objects.requireNonNull(h.get(view)).size() == 1) {
                 if (position > -1 && position < 1) {
                     if (h.get(view) == null) {
-                        h.put(view, new ArrayList<Float>());
+                        h.put(view, new ArrayList<>());
                     }
-                    h.get(view).add(position);
-                    if (h.get(view).size() == 2) {
-                        float zero = h.get(view).get(0);
-                        float cha = h.get(view).get(1) - h.get(view).get(0);
+                    Objects.requireNonNull(h.get(view)).add(position);
+                    if (Objects.requireNonNull(h.get(view)).size() == 2) {
+                        float zero = Objects.requireNonNull(h.get(view)).get(0);
+                        float cha = Objects.requireNonNull(h.get(view)).get(1) - Objects.requireNonNull(h.get(view)).get(0);
                         if (zero > 0) {
                             if (cha > -1 && cha < 0) {
                                 //in
@@ -125,9 +116,6 @@ public abstract class BaseTransformer implements ViewPagerEx.PageTransformer {
 
     /**
      * Called each {@link #transformPage(View, float)} call after {@link #onTransform(View, float)} is finished.
-     *
-     * @param view
-     * @param position
      */
     private void onPostTransform(View view, float position) {
         if (mCustomAnimationInterface != null) {

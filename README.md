@@ -132,9 +132,6 @@ colors.xml
 </resources>
 ```
 
-## Example
-- [Example Project]https://github.com/firdausmaulan/GlideSlider-Example)
-
 ## Thanks
 
 - [AndroidImageSlider](https://github.com/daimajia/AndroidImageSlider)

@@ -30,7 +30,7 @@ add GlideSlider
 
 ```groovy
 dependencies {
-    implementation "com.github.firdausmaulan:GlideSlider:1.5.2"
+    implementation "com.github.firdausmaulan:GlideSlider:1.6.0"
 }
 ```
 
@@ -131,9 +131,6 @@ colors.xml
     <color name="glide_slider_description_background_color">#77000000</color>
 </resources>
 ```
-
-## Example
-- [Example Project]https://github.com/firdausmaulan/GlideSlider-Example)
 
 ## Thanks
 

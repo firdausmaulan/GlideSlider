@@ -8,7 +8,7 @@ public class ForegroundToBackgroundTransformer extends BaseTransformer {
     protected void onTransform(View view, float position) {
         final float height = view.getHeight();
         final float width = view.getWidth();
-        final float scale = min(position > 0 ? 1f : Math.abs(1f + position), 0.5f);
+        final float scale = min(position > 0 ? 1f : Math.abs(1f + position));
 
         view.setScaleX(scale);
         view.setScaleY(scale);
@@ -17,7 +17,7 @@ public class ForegroundToBackgroundTransformer extends BaseTransformer {
         view.setTranslationX(position > 0 ? width * position : -width * position * 0.25f);
     }
 
-    private static float min(float val, float min) {
-        return val < min ? min : val;
+    private static float min(float val) {
+        return Math.max(val, (float) 0.5);
     }
 }

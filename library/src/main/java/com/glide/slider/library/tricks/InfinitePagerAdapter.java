@@ -17,7 +17,7 @@ public class InfinitePagerAdapter extends PagerAdapter {
     private static final String TAG = "InfinitePagerAdapter";
     private static final boolean DEBUG = false;
 
-    private SliderAdapter adapter;
+    private final SliderAdapter adapter;
 
     public InfinitePagerAdapter(SliderAdapter adapter) {
         this.adapter = adapter;

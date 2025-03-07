@@ -25,7 +25,7 @@ import java.util.ArrayList;
  */
 public class PagerIndicator extends LinearLayout implements ViewPagerEx.OnPageChangeListener {
 
-    private Context mContext;
+    private final Context mContext;
 
     /**
      * bind this Indicator with {@link com.glide.slider.library.tricks.ViewPagerEx}
@@ -70,26 +70,26 @@ public class PagerIndicator extends LinearLayout implements ViewPagerEx.OnPageCh
         Invisible;
     };
 
-    private GradientDrawable mUnSelectedGradientDrawable;
-    private GradientDrawable mSelectedGradientDrawable;
+    private final GradientDrawable mUnSelectedGradientDrawable;
+    private final GradientDrawable mSelectedGradientDrawable;
 
-    private LayerDrawable mSelectedLayerDrawable;
-    private LayerDrawable mUnSelectedLayerDrawable;
+    private final LayerDrawable mSelectedLayerDrawable;
+    private final LayerDrawable mUnSelectedLayerDrawable;
 
-    private float mSelectedPadding_Left;
-    private float mSelectedPadding_Right;
-    private float mSelectedPadding_Top;
-    private float mSelectedPadding_Bottom;
+    private final float mSelectedPadding_Left;
+    private final float mSelectedPadding_Right;
+    private final float mSelectedPadding_Top;
+    private final float mSelectedPadding_Bottom;
 
-    private float mUnSelectedPadding_Left;
-    private float mUnSelectedPadding_Right;
-    private float mUnSelectedPadding_Top;
-    private float mUnSelectedPadding_Bottom;
+    private final float mUnSelectedPadding_Left;
+    private final float mUnSelectedPadding_Right;
+    private final float mUnSelectedPadding_Top;
+    private final float mUnSelectedPadding_Bottom;
 
     /**
      * Put all the indicators into a ArrayList, so we can remove them easily.
      */
-    private ArrayList<ImageView> mIndicators = new ArrayList<ImageView>();
+    private final ArrayList<ImageView> mIndicators = new ArrayList<ImageView>();
 
 
     public PagerIndicator(Context context) {
@@ -211,12 +211,12 @@ public class PagerIndicator extends LinearLayout implements ViewPagerEx.OnPageCh
         if (selected == 0) {
             mSelectedDrawable = mSelectedLayerDrawable;
         } else {
-            mSelectedDrawable = mContext.getResources().getDrawable(mUserSetSelectedIndicatorResId);
+            mSelectedDrawable = ContextCompat.getDrawable(mContext, mUserSetSelectedIndicatorResId);
         }
         if (unselected == 0) {
             mUnselectedDrawable = mUnSelectedLayerDrawable;
         } else {
-            mUnselectedDrawable = mContext.getResources().getDrawable(mUserSetUnSelectedIndicatorResId);
+            mUnselectedDrawable = ContextCompat.getDrawable(mContext, mUserSetUnSelectedIndicatorResId);
         }
 
         resetDrawable();
@@ -327,11 +327,11 @@ public class PagerIndicator extends LinearLayout implements ViewPagerEx.OnPageCh
 
 
     private void resetDrawable() {
-        for (View i : mIndicators) {
+        for (ImageView i : mIndicators) {
             if (mPreviousSelectedIndicator != null && mPreviousSelectedIndicator.equals(i)) {
-                ((ImageView) i).setImageDrawable(mSelectedDrawable);
+                i.setImageDrawable(mSelectedDrawable);
             } else {
-                ((ImageView) i).setImageDrawable(mUnselectedDrawable);
+                i.setImageDrawable(mUnselectedDrawable);
             }
         }
     }
@@ -373,7 +373,7 @@ public class PagerIndicator extends LinearLayout implements ViewPagerEx.OnPageCh
         }
     }
 
-    private DataSetObserver dataChangeObserver = new DataSetObserver() {
+    private final DataSetObserver dataChangeObserver = new DataSetObserver() {
         @Override
         public void onChanged() {
             PagerAdapter adapter = mPager.getAdapter();

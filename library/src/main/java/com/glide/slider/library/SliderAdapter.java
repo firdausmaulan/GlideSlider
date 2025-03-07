@@ -1,6 +1,5 @@
 package com.glide.slider.library;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
@@ -16,10 +15,10 @@ import java.util.ArrayList;
  */
 public class SliderAdapter extends PagerAdapter implements BaseSliderView.ImageLoadListener {
 
-    private ArrayList<BaseSliderView> mImageContents;
+    private final ArrayList<BaseSliderView> mImageContents;
 
-    SliderAdapter(Context context) {
-        mImageContents = new ArrayList<BaseSliderView>();
+    SliderAdapter() {
+        mImageContents = new ArrayList<>();
     }
 
     <T extends BaseSliderView> void addSlider(T slider) {

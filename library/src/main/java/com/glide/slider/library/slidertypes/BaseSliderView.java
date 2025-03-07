@@ -3,6 +3,8 @@ package com.glide.slider.library.slidertypes;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import android.view.View;
@@ -228,11 +230,11 @@ public abstract class BaseSliderView {
             if (mRequestOptions != null) {
                 requestBuilder.load(imageToLoad)
                         .apply(mRequestOptions)
-                        .listener(new RequestListener<Drawable>() {
+                        .listener(new RequestListener<>() {
                             @Override
                             public boolean onLoadFailed(@Nullable GlideException e,
                                                         Object model,
-                                                        Target<Drawable> target,
+                                                        @NonNull Target<Drawable> target,
                                                         boolean isFirstResource) {
                                 mProgressBar.setVisibility(View.GONE);
                                 triggerOnEndListener(false);
@@ -240,10 +242,10 @@ public abstract class BaseSliderView {
                             }
 
                             @Override
-                            public boolean onResourceReady(Drawable resource,
-                                                           Object model,
+                            public boolean onResourceReady(@NonNull Drawable resource,
+                                                           @NonNull Object model,
                                                            Target<Drawable> target,
-                                                           DataSource dataSource,
+                                                           @NonNull DataSource dataSource,
                                                            boolean isFirstResource) {
                                 mProgressBar.setVisibility(View.GONE);
                                 triggerOnDrawableLoaded(resource);
@@ -253,11 +255,11 @@ public abstract class BaseSliderView {
                         }).into(targetImageView);
             } else {
                 requestBuilder.load(imageToLoad)
-                        .listener(new RequestListener<Drawable>() {
+                        .listener(new RequestListener<>() {
                             @Override
                             public boolean onLoadFailed(@Nullable GlideException e,
                                                         Object model,
-                                                        Target<Drawable> target,
+                                                        @NonNull Target<Drawable> target,
                                                         boolean isFirstResource) {
                                 mProgressBar.setVisibility(View.GONE);
                                 triggerOnEndListener(false);
@@ -265,10 +267,10 @@ public abstract class BaseSliderView {
                             }
 
                             @Override
-                            public boolean onResourceReady(Drawable resource,
-                                                           Object model,
+                            public boolean onResourceReady(@NonNull Drawable resource,
+                                                           @NonNull Object model,
                                                            Target<Drawable> target,
-                                                           DataSource dataSource,
+                                                           @NonNull DataSource dataSource,
                                                            boolean isFirstResource) {
                                 mProgressBar.setVisibility(View.GONE);
                                 triggerOnDrawableLoaded(resource);

@@ -30,7 +30,7 @@ add GlideSlider
 
 ```groovy
 dependencies {
-    implementation "com.github.firdausmaulan:GlideSlider:1.6.0"
+    implementation "com.github.firdausmaulan:GlideSlider:1.6.1"
 }
 ```
 
